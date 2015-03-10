@@ -33,7 +33,11 @@ import com.example.androidtest.progress.MyProgressActivity;
 import com.example.androidtest.pullzool.PullMainActivity;
 import com.example.androidtest.selectcity.CityList;
 import com.example.androidtest.task.TaskActivity;
-
+/**
+ * 
+ * @author hzq
+ *
+ */
 public class MainActivity extends ActionBarActivity {
 
 	@Override
