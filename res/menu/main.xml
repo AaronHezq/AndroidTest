@@ -1,0 +1,52 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.androidtest.MainActivity" >
+
+    <item
+        android:id="@+id/select_city"
+        android:orderInCategory="100"
+        android:title="城市选择"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/progress"
+        android:orderInCategory="100"
+        android:title="进度条"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/handlertest"
+        android:orderInCategory="100"
+        android:title="Handler接收消息测试"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/tasktest"
+        android:orderInCategory="100"
+        android:title="AsyncTask"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/listviewtest"
+        android:orderInCategory="100"
+        android:title="ListView动画加载"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="头部缩放"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/vitamio"
+        android:orderInCategory="100"
+        android:title="vitamio"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/opengl"
+        android:orderInCategory="100"
+        android:title="粒子效果"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/pulltorefresh"
+        android:orderInCategory="100"
+        android:title="pulltorefresh"
+        app:showAsAction="never"/>
+
+</menu>
