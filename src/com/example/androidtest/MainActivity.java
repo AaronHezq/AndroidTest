@@ -38,6 +38,7 @@ import com.example.androidtest.task.TaskActivity;
  * @author hzq
  *
  */
+//
 public class MainActivity extends ActionBarActivity {
 
 	@Override
