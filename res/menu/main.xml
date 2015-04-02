@@ -48,5 +48,10 @@
         android:orderInCategory="100"
         android:title="pulltorefresh"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/VideoViewDemo2"
+        android:orderInCategory="100"
+        android:title="VideoViewDemo2"
+        app:showAsAction="never"/>
 
 </menu>

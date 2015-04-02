@@ -25,17 +25,29 @@
             android:text="Play" />
     </LinearLayout>
 
-    <io.vov.vitamio.widget.VideoView
-        android:id="@+id/surface_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="openVideo"
-        android:text="@string/openvideo1" />
+        <io.vov.vitamio.widget.CenterLayout
+            android:id="@+id/dd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
+            <io.vov.vitamio.widget.VideoView
+                android:id="@+id/surface_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </io.vov.vitamio.widget.CenterLayout>
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:onClick="openVideo"
+            android:text="@string/openvideo1" />
+    </RelativeLayout>
 
 </LinearLayout>

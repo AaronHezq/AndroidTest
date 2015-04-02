@@ -1,5 +1,6 @@
 package com.example.androidtest;
 
+import io.vov.vitamio.demo.VideoViewDemo2;
 import io.vov.vitamio.demo.VitamioListActivity;
 
 import java.io.IOException;
@@ -31,12 +32,15 @@ import com.example.androidtest.listview.ListViewActivity;
 import com.example.androidtest.opengl.ParticleOpenglActivity;
 import com.example.androidtest.progress.MyProgressActivity;
 import com.example.androidtest.pullzool.PullMainActivity;
+import com.example.androidtest.residemenu.ResideMenu;
+import com.example.androidtest.residemenu.ResideMenu.OnMenuListener;
 import com.example.androidtest.selectcity.CityList;
 import com.example.androidtest.task.TaskActivity;
+
 /**
  * 
  * @author hzq
- *
+ * 
  */
 //
 public class MainActivity extends ActionBarActivity {
@@ -45,8 +49,29 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		setMenu();
 	}
+
+	private ResideMenu resideMenu;
+
+	private void setMenu() {
+		resideMenu = new ResideMenu(this);
+		resideMenu.attachToActivity(this);
+		resideMenu.setMenuListener(menuListener);
+		resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
+		resideMenu.setScaleValue(0.5f);
+	}
+
+	private OnMenuListener menuListener = new OnMenuListener() {
+		@Override
+		public void openMenu() {
+		}
+
+		@Override
+		public void closeMenu() {
+
+		}
+	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,6 +119,10 @@ public class MainActivity extends ActionBarActivity {
 			startActivity(new Intent(MainActivity.this, PullToRefreshActivity.class));
 			return true;
 		}
+		if (id == R.id.VideoViewDemo2) {
+			startActivity(new Intent(MainActivity.this, VideoViewDemo2.class));
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 
 	}
@@ -104,24 +133,24 @@ public class MainActivity extends ActionBarActivity {
 
 	public <T> void postTest() {
 		// String url = "http://192.168.1.217:3000/v1/homes/basic_data";
-//		String url = "http://demo2.dfc.cn/sjll/v1/homes/basic_data";
-//		List<NameValuePair> params = new ArrayList<NameValuePair>();
-//		params.add(new BasicNameValuePair("uni_code", "23737485393442");
-//		params.add(new BasicNameValuePair("area_id", "2");
-//		HttpUtils http = new HttpUtils();
-//		http.configSoTimeout(5 * 1000);
-//		http.send(HttpMethod.POST, url, params, new HttpCallBack() {
-//
-//			@Override
-//			public void success(String content, int code) {
-//				System.out.println("正确：" + content);
-//			}
-//
-//			@Override
-//			public void onFailure(HttpException error, String msg) {
-//				System.out.println("错误：" + error.getMessage());
-//			}
-//		});
+		// String url = "http://demo2.dfc.cn/sjll/v1/homes/basic_data";
+		// List<NameValuePair> params = new ArrayList<NameValuePair>();
+		// params.add(new BasicNameValuePair("uni_code", "23737485393442");
+		// params.add(new BasicNameValuePair("area_id", "2");
+		// HttpUtils http = new HttpUtils();
+		// http.configSoTimeout(5 * 1000);
+		// http.send(HttpMethod.POST, url, params, new HttpCallBack() {
+		//
+		// @Override
+		// public void success(String content, int code) {
+		// System.out.println("正确：" + content);
+		// }
+		//
+		// @Override
+		// public void onFailure(HttpException error, String msg) {
+		// System.out.println("错误：" + error.getMessage());
+		// }
+		// });
 		sendPost();
 	}
 
@@ -130,7 +159,7 @@ public class MainActivity extends ActionBarActivity {
 			public void run() {
 				String result = "";
 				String url = "http://demo2.dfc.cn/sjll/v1/homes/basic_data";
-				//HttpClient httpClient = new DefaultHttpClient();
+				// HttpClient httpClient = new DefaultHttpClient();
 				HttpPost httpPost = new HttpPost(url);
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair("uni_code", "23737485393442"));

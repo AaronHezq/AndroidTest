@@ -54,6 +54,10 @@
             android:label="Media/VideoView" >
         </activity>
         <activity
+            android:name="io.vov.vitamio.demo.VideoViewDemo2"
+            android:label="Media/VideoView" >
+        </activity>
+        <activity
             android:name="io.vov.vitamio.demo.MediaPlayerDemo_Video"
             android:label="Media/MediaPlayer" >
         </activity>

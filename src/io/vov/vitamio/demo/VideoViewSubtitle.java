@@ -21,6 +21,7 @@ import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.MediaPlayer.OnTimedTextListener;
 import io.vov.vitamio.widget.VideoView;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ import com.example.androidtest.R;
 
 public class VideoViewSubtitle extends Activity {
 
-	private String path = "";
+	private String path = "http://shbcwl-m.qiniudn.com/jx0zQwki0sgJ6dv95KFlO01bfhQ=/ljghOhIC23fMrItEgp553eSgRNEB";
 	private String subtitle_path = "";
 	private VideoView mVideoView;
 	private TextView mSubtitleView;

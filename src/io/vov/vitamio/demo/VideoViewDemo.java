@@ -16,15 +16,18 @@
 
 package io.vov.vitamio.demo;
 
-
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,8 +36,8 @@ import com.example.androidtest.R;
 public class VideoViewDemo extends Activity {
 
 	/**
-	 * TODO: Set the path variable to a streaming video URL or a local media file
-	 * path.
+	 * TODO: Set the path variable to a streaming video URL or a local media
+	 * file path.
 	 */
 	private String path = "http://shbcwl-m.qiniudn.com/tqyNH6kFDSN21GTyaiE1l3sQPTc=/lhCzZQTFSWkmRpfGKjwS_k87FRVN";
 	private VideoView mVideoView;
@@ -50,7 +53,9 @@ public class VideoViewDemo extends Activity {
 		mVideoView = (VideoView) findViewById(R.id.surface_view);
 		if (path == "") {
 			// Tell the user to provide a media file URL/path.
-			Toast.makeText(VideoViewDemo.this, "Please edit VideoViewDemo Activity, and set path" + " variable to your media file URL/path", Toast.LENGTH_LONG).show();
+			Toast.makeText(VideoViewDemo.this,
+					"Please edit VideoViewDemo Activity, and set path" + " variable to your media file URL/path",
+					Toast.LENGTH_LONG).show();
 			return;
 		} else {
 			/*
@@ -70,17 +75,67 @@ public class VideoViewDemo extends Activity {
 		}
 
 	}
-	
+
 	public void startPlay(View view) {
-	    String url = mEditText.getText().toString();
-	    path = url;
-	    if (!TextUtils.isEmpty(url)) {
-	        mVideoView.setVideoPath(url);
-	    }
-    }
-	
-	public void openVideo(View View) {
-	  mVideoView.setVideoPath(path);
+		String url = mEditText.getText().toString();
+		path = url;
+		if (!TextUtils.isEmpty(url)) {
+			mVideoView.setVideoPath(url);
+		}
 	}
-	
+
+	int mVideoLayout = 0;
+
+	public void openVideo(View View) {
+		// mVideoView.setVideoPath(path);
+		// mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);
+		mVideoLayout++;
+		if (mVideoLayout == 2) {
+			mVideoLayout = 0;
+		}
+		switch (mVideoLayout) {
+		case 0:// 原始画面大小
+			mVideoLayout = VideoView.VIDEO_LAYOUT_ORIGIN;
+			break;
+		case 1:// 画面全屏
+			mVideoLayout = VideoView.VIDEO_LAYOUT_SCALE;
+			break;
+		case 2:// 画面拉伸
+			mVideoLayout = VideoView.VIDEO_LAYOUT_STRETCH;
+			break;
+		case 3:// 画面裁剪
+			mVideoLayout = VideoView.VIDEO_LAYOUT_ZOOM;
+			break;
+		}
+		if (mVideoLayout == 0) {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}
+		fullScreenChange();
+		mVideoView.setVideoLayout(mVideoLayout, 0);
+	}
+
+	/**
+	 * 全屏切换
+	 */
+	public void fullScreenChange() {
+		SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean fullScreen = mPreferences.getBoolean("fullScreen", false);
+		WindowManager.LayoutParams attrs = getWindow().getAttributes();
+		System.out.println("fullScreen的值:" + fullScreen);
+		if (fullScreen) {
+			attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+			getWindow().setAttributes(attrs);
+			// 取消全屏设置
+			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+			mPreferences.edit().putBoolean("fullScreen", false).commit();
+		} else {
+			attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+			getWindow().setAttributes(attrs);
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+			mPreferences.edit().putBoolean("fullScreen", true).commit();
+		}
+	}
+
 }
