@@ -31,6 +31,7 @@ import com.example.androidtest.handlertest.HandlerTestActivity;
 import com.example.androidtest.listview.ListViewActivity;
 import com.example.androidtest.opengl.ParticleOpenglActivity;
 import com.example.androidtest.progress.MyProgressActivity;
+import com.example.androidtest.pulltorefresh.PullRefreshTestActivity;
 import com.example.androidtest.pullzool.PullMainActivity;
 import com.example.androidtest.residemenu.ResideMenu;
 import com.example.androidtest.residemenu.ResideMenu.OnMenuListener;
@@ -42,7 +43,6 @@ import com.example.androidtest.task.TaskActivity;
  * @author hzq
  * 
  */
-//
 public class MainActivity extends ActionBarActivity {
 
 	@Override
@@ -117,6 +117,10 @@ public class MainActivity extends ActionBarActivity {
 		}
 		if (id == R.id.pulltorefresh) {
 			startActivity(new Intent(MainActivity.this, PullToRefreshActivity.class));
+			return true;
+		}
+		if (id == R.id.pullrefreshtest) {
+			startActivity(new Intent(MainActivity.this, PullRefreshTestActivity.class));
 			return true;
 		}
 		if (id == R.id.VideoViewDemo2) {

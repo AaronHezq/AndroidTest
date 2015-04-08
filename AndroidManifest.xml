@@ -31,6 +31,7 @@
         <activity android:name=".pullzool.PullToZoomListActivity" />
         <activity android:name=".pullzool.PullToZoomScrollActivity" />
         <activity android:name=".opengl.ParticleOpenglActivity" />
+        <activity android:name=".pulltorefresh.PullRefreshTestActivity" />
         
         <activity android:name="refresh.rentals.PullToRefreshActivity" />
         

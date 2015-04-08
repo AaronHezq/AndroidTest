@@ -49,6 +49,11 @@
         android:title="pulltorefresh"
         app:showAsAction="never"/>
     <item
+        android:id="@+id/pullrefreshtest"
+        android:orderInCategory="100"
+        android:title="PullRefreshTest"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/VideoViewDemo2"
         android:orderInCategory="100"
         android:title="VideoViewDemo2"
