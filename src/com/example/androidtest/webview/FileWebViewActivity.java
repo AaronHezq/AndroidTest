@@ -12,20 +12,21 @@ import com.example.androidtest.R;
 
 
 public class FileWebViewActivity extends Activity {
-
+	WebView webView;
+	ValueCallback<Uri> mUploadMessage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.filewebview_activity);
-		WebView webView = (WebView) findViewById(R.id.webview);
+		webView = (WebView) findViewById(R.id.webview);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.setWebChromeClient(new WebChromeClient() {
 			// Android > 4.1.1 调用这个方法
 			
 			public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
 				System.out.println("========1");
-				ValueCallback<Uri> mUploadMessage = uploadMsg;
+				mUploadMessage = uploadMsg;
 				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 				intent.addCategory(Intent.CATEGORY_OPENABLE);
 				intent.setType("image/*");
@@ -35,7 +36,7 @@ public class FileWebViewActivity extends Activity {
 			// 3.0 + 调用这个方法
 			public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
 				System.out.println("========2");
-				ValueCallback<Uri> mUploadMessage = uploadMsg;
+				mUploadMessage = uploadMsg;
 				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 				intent.addCategory(Intent.CATEGORY_OPENABLE);
 				intent.setType("image/*");
@@ -45,7 +46,7 @@ public class FileWebViewActivity extends Activity {
 			// Android < 3.0 调用这个方法
 			public void openFileChooser(ValueCallback<Uri> uploadMsg) {
 				System.out.println("========3");
-				ValueCallback<Uri> mUploadMessage = uploadMsg;
+				mUploadMessage = uploadMsg;
 				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 				intent.addCategory(Intent.CATEGORY_OPENABLE);
 				intent.setType("image/*");
@@ -54,8 +55,23 @@ public class FileWebViewActivity extends Activity {
 			}
 		});
 		webView.loadUrl("http://demo2.dfc.cn/activity/primary/index.html");
+//		webView.loadUrl("file:///android_asset/test.html");
 	}
 
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		if (requestCode == 1) { 
+	        if (null == mUploadMessage) 
+	            return; 
+	        Uri result = intent == null || resultCode != RESULT_OK ? null 
+	                : intent.getData(); 
+	        mUploadMessage.onReceiveValue(result); 
+	        mUploadMessage = null;
+	    }  
+		System.out.println("》》》》》onActivityResult");
+		super.onActivityResult(requestCode, resultCode, intent);
+	}
 
 
 
