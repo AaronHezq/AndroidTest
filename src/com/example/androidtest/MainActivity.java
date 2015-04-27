@@ -36,7 +36,9 @@ import com.example.androidtest.pullzool.PullMainActivity;
 import com.example.androidtest.residemenu.ResideMenu;
 import com.example.androidtest.residemenu.ResideMenu.OnMenuListener;
 import com.example.androidtest.selectcity.CityList;
+import com.example.androidtest.spring.SpringActivity;
 import com.example.androidtest.task.TaskActivity;
+import com.example.androidtest.webview.FileWebViewActivity;
 
 /**
  * 
@@ -125,6 +127,14 @@ public class MainActivity extends ActionBarActivity {
 		}
 		if (id == R.id.VideoViewDemo2) {
 			startActivity(new Intent(MainActivity.this, VideoViewDemo2.class));
+			return true;
+		}
+		if (id == R.id.SpringActivity) {
+			startActivity(new Intent(MainActivity.this, SpringActivity.class));
+			return true;
+		}
+		if (id == R.id.FileWebViewActivity) {
+			startActivity(new Intent(MainActivity.this, FileWebViewActivity.class));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

@@ -8,6 +8,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 
+@SuppressLint("ClickableViewAccessibility") 
 public class CustomFrameLayout extends FrameLayout {
 
 	private float mLastMotionX, mLastMotionY;//记录手指触摸的位置X，Y坐标
@@ -55,7 +56,7 @@ public class CustomFrameLayout extends FrameLayout {
 
 	/**
 	 * 重写onTouchEvent方法，检测用户滑动的距离，方向等，
-	 * 然后调用scrollTo来让整个View偏移，这可谓是核心代码了
+	 * 然后调用scrollTo来让整个View偏移
 	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -131,7 +132,7 @@ public class CustomFrameLayout extends FrameLayout {
 	}
 	
 	private void pull(float diff){
-		int value = Math.round(diff / 2.0F);//diff就是偏移量，除以2.0相当于一个缩放
+		int value = Math.round(diff / 4.0F);//diff就是偏移量，除以2.0相当于一个缩放
 		if(mOrientation == Orientation.VERTICAL){
 			scrollTo(0, value);//注意这里是核心了，Y方向上移动value距离，X方向上保持不变
 		}else if(mOrientation == Orientation.HORIZONTAL){
@@ -140,7 +141,7 @@ public class CustomFrameLayout extends FrameLayout {
 	}
 	
 	private void smoothScrollTo(float diff){
-		int value = Math.round(diff / 2.0F);
+		int value = Math.round(diff / 4.0F);
 		mScrollToHomeRunnable = new ScrollToHomeRunnable(value, 0);
 		mState = State.REFRESHING;//当前状态为正在刷新
 		post(mScrollToHomeRunnable);//view自身有一个post方法，我们提交一个scrollTo的任务给它
@@ -175,6 +176,7 @@ public class CustomFrameLayout extends FrameLayout {
 				}else if(mOrientation == Orientation.VERTICAL){
 					scrollTo(0, current);//垂直scroll
 				}
+				
 			}
 			
 			if(current != target){//没有回到原点：在经过16毫秒之后继续postDelayed这个任务

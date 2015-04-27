@@ -58,5 +58,15 @@
         android:orderInCategory="100"
         android:title="VideoViewDemo2"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/SpringActivity"
+        android:orderInCategory="100"
+        android:title="SpringActivity"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/FileWebViewActivity"
+        android:orderInCategory="100"
+        android:title="FileWebViewActivity"
+        app:showAsAction="never"/>
 
 </menu>
