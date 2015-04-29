@@ -1,5 +1,6 @@
 package com.example.androidtest.webview;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import com.example.androidtest.R;
 public class FileWebViewActivity extends Activity {
 	WebView webView;
 	ValueCallback<Uri> mUploadMessage;
+	ValueCallback<Uri[]> mUploadMessages;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,21 @@ public class FileWebViewActivity extends Activity {
 				intent.addCategory(Intent.CATEGORY_OPENABLE);
 				intent.setType("image/*");
 				startActivityForResult(Intent.createChooser(intent, "完成操作需要使用"), 1);
-
+			}
+			@SuppressLint("NewApi") @Override
+			public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback,
+					FileChooserParams fileChooserParams) {
+				System.out.println("========4");
+				mUploadMessages = filePathCallback;
+				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+				intent.addCategory(Intent.CATEGORY_OPENABLE);
+				intent.setType("image/*");
+				startActivityForResult(Intent.createChooser(intent, "完成操作需要使用"), 2);
+				return true;
 			}
 		});
-		webView.loadUrl("http://demo2.dfc.cn/activity/primary/index.html");
-//		webView.loadUrl("file:///android_asset/test.html");
+		webView.loadUrl("http://192.168.1.58:3000/");
+		//webView.loadUrl("file:///android_asset/test.html");
 	}
 
 	
@@ -65,10 +77,18 @@ public class FileWebViewActivity extends Activity {
 	        if (null == mUploadMessage) 
 	            return; 
 	        Uri result = intent == null || resultCode != RESULT_OK ? null 
-	                : intent.getData(); 
+	                : intent.getData();
 	        mUploadMessage.onReceiveValue(result); 
 	        mUploadMessage = null;
-	    }  
+	    }else if(requestCode == 2) { 
+	        if (null == mUploadMessages) 
+	            return; 
+	        Uri result = intent == null || resultCode != RESULT_OK ? null 
+	                : intent.getData();
+	        System.out.println(result.getPath());
+	        System.out.println(result.getPort());
+	        mUploadMessages.onReceiveValue(new Uri[]{result}); 
+	    }
 		System.out.println("》》》》》onActivityResult");
 		super.onActivityResult(requestCode, resultCode, intent);
 	}
