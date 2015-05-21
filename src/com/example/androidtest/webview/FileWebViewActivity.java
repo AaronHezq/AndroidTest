@@ -66,7 +66,7 @@ public class FileWebViewActivity extends Activity {
 				return true;
 			}
 		});
-		webView.loadUrl("http://192.168.1.58:3000/");
+		webView.loadUrl("http://192.168.1.58:3000/test.html");
 		//webView.loadUrl("file:///android_asset/test.html");
 	}
 
